@@ -1,6 +1,5 @@
 import type { Metadata } from 'next'
 import { getTodosFromDB } from "@/queries";
-import { addTodo } from "@/server-actions";
 import TodoListItem from "@/components/ui/TodoListItem";
 import { Input } from "@/components/ui/input";
 import SubmitButton from "@/components/ui/SubmitButton";
@@ -56,14 +55,13 @@ export default async function TodosPage() {
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-6">
-          <form action={addTodo} className="flex gap-2">
+          <form className="flex flex-col sm:flex-row gap-2">
             <Input 
               name="task" 
               placeholder="What needs to be done?" 
               className="flex-1 border-border bg-background text-foreground"
-              required
               minLength={1}
-              maxLength={255}
+              maxLength={100}
             />
             <SubmitButton />
           </form>
