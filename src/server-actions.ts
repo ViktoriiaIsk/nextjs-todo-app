@@ -27,14 +27,14 @@ export async function addTodoWithState(
     
     if (!task || task.trim().length === 0) {
       return {
-        message: "Task cannot be empty!",
+        message: "Please enter a task",
         success: false
       };
     }
     
-    if (task.length > 255) {
+    if (task.trim().length > 100) {
       return {
-        message: "Task is too long (max 255 characters)!",
+        message: "Task is too long (max 100 characters)",
         success: false
       };
     }
@@ -42,15 +42,16 @@ export async function addTodoWithState(
     await addTodoToDB(task.trim());
     revalidatePath("/todos");
     
+    // Return empty state after successful addition to clear the form
     return {
-      message: "Task added successfully! ✅",
+      message: "",
       success: true
     };
     
   } catch (error) {
     console.error("Error adding todo:", error);
     return {
-      message: "Failed to add task. Please try again.",
+      message: "Something went wrong. Please try again.",
       success: false
     };
   }
