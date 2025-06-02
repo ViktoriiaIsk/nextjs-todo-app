@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { getTodosFromDB } from "@/queries";
+import { getTodos } from "@/server-actions";
 import TodoListItem from "@/components/ui/TodoListItem";
 import { Input } from "@/components/ui/input";
 import SubmitButton from "@/components/ui/SubmitButton";
@@ -23,7 +23,7 @@ function TodoListSkeleton() {
 }
 
 async function TodoList() {
-  const todos = await getTodosFromDB();
+  const todos = await getTodos();
 
   if (todos.length === 0) {
     return (

@@ -6,8 +6,8 @@ import { Button } from "@/components/ui/button";
 import { addTodoWithState } from "@/server-actions";
 
 interface ActionState {
-  message: string;
-  success: boolean;
+  message?: string;
+  error?: string;
 }
 
 interface SubmitButtonProps {
@@ -16,19 +16,18 @@ interface SubmitButtonProps {
 
 export default function SubmitButton({ formAction = addTodoWithState }: SubmitButtonProps) {
   const { pending } = useFormStatus();
-  const [state, action, isPending] = useActionState(formAction, { message: "", success: false });
+  const [state, action, isPending] = useActionState(formAction, { message: "", error: "" });
   const formRef = useRef<HTMLFormElement | null>(null);
 
-  // Clear form and reset state after successful submission
+  // Clear form after successful submission
   useEffect(() => {
-    if (state.success && !isPending) {
-      // Find the form element and reset it
+    if (state.message && !state.error && !isPending) {
       const form = document.querySelector('form') as HTMLFormElement;
       if (form) {
         form.reset();
       }
     }
-  }, [state.success, isPending]);
+  }, [state.message, state.error, isPending]);
 
   return (
     <div className="flex flex-col gap-2">
@@ -41,10 +40,10 @@ export default function SubmitButton({ formAction = addTodoWithState }: SubmitBu
         {(pending || isPending) ? "Adding..." : "Add"}
       </Button>
       
-      {/* Show only error messages */}
-      {state?.message && !state.success && (
+      {/* Show error messages */}
+      {state?.error && (
         <div className="text-sm px-3 py-2 rounded-md bg-red-50 text-red-700 border border-red-200 break-words">
-          {state.message}
+          {state.error}
         </div>
       )}
     </div>

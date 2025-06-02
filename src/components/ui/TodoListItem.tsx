@@ -8,7 +8,7 @@ export default function TodoListItem({ todo }: { todo: Todo }) {
       <div className="flex items-center gap-3 flex-1 min-w-0">
         <form action={toggleTodo}>
           <input type="hidden" name="id" value={todo.id} />
-          <input type="hidden" name="checked" value={(!todo.checked).toString()} />
+          <input type="hidden" name="checked" value={todo.checked.toString()} />
           <button
             type="submit"
             className="text-xl focus:outline-none focus:ring-2 focus:ring-ring rounded transition-all hover:bg-accent hover:scale-110 flex-shrink-0"
