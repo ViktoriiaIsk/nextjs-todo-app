@@ -10,18 +10,6 @@ export const metadata: Metadata = {
   description: 'Manage your tasks efficiently',
 }
 
-function TodoListSkeleton() {
-  return (
-    <div className="space-y-3">
-      {[...Array(3)].map((_, i) => (
-        <div key={i} className="animate-pulse">
-          <div className="h-16 bg-muted rounded-md"></div>
-        </div>
-      ))}
-    </div>
-  );
-}
-
 async function TodoList() {
   const todos = await getTodos();
 

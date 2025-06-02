@@ -1,6 +1,6 @@
 "use client";
 
-import { useActionState, useEffect, useRef } from "react";
+import { useActionState, useEffect } from "react";
 import { useFormStatus } from "react-dom";
 import { Button } from "@/components/ui/button";
 import { addTodoWithState } from "@/server-actions";
@@ -17,7 +17,6 @@ interface SubmitButtonProps {
 export default function SubmitButton({ formAction = addTodoWithState }: SubmitButtonProps) {
   const { pending } = useFormStatus();
   const [state, action, isPending] = useActionState(formAction, { message: "", error: "" });
-  const formRef = useRef<HTMLFormElement | null>(null);
 
   // Clear form after successful submission
   useEffect(() => {
