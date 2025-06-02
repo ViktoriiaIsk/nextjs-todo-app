@@ -6,21 +6,6 @@ export interface Id {
   id: number;
 }
 
-export interface Pokemon {
-  id: number;
-  name: string;
-  sprites: {
-    front_default: string;
-  };
-}
-
-export interface PokemonApiResult {
-  results: {
-    name: string;
-    url: string;
-  }[];
-}
-
 export type Todo = {
   id: number;
   task: string;
